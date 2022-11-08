@@ -19,5 +19,6 @@
     "allowUnreachableCode": false,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts"],
+  "files": ["custom.d.ts"]
 }

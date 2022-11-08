@@ -1,5 +1,6 @@
 {
   "exclude": ["node_modules/**/*"],
+  "files": ["apps/producer/custom.d.ts"],
   "references": [
     {
       "path": "./packages/consumer"
