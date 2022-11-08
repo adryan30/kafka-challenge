@@ -64,8 +64,6 @@ services:
     ports:
       - '6379:6379'
     command: /opt/bitnami/scripts/redis/run.sh --save 20 1 --loglevel warning
-    # volumes:
-    #   - cache:/bitnami
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   kafka-ui:

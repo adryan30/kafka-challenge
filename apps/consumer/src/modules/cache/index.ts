@@ -2,7 +2,7 @@ import * as redis from "redis";
 import { ICache } from "../../interfaces";
 
 export class RedisCache implements ICache {
-  private readonly cache;
+  private readonly cache: redis.RedisClientType;
   private ttl: number;
 
   constructor(ttl: number) {
@@ -42,5 +42,9 @@ export class RedisCache implements ICache {
 
   flush() {
     this.cache.flushAll();
+  }
+
+  disconnect() {
+    this.cache.disconnect();
   }
 }

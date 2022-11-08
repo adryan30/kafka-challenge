@@ -6,11 +6,7 @@ import {
   EachMessagePayload,
   Partitioners,
 } from "kafkajs";
-import {
-  ICache,
-  IIPStackController,
-  IKafkaConsumer,
-} from "../../../interfaces";
+import { IIPStackController, IKafkaConsumer } from "../../../interfaces";
 import { RedisCache } from "../../cache";
 import { IPStackController } from "../../ip-stack";
 
@@ -33,7 +29,8 @@ export class KafkaConsumer implements IKafkaConsumer {
       topics: [String(process.env.KAFKA_TOPIC)],
       fromBeginning: false,
     };
-    this.responseTopic = String(process.env.KAFKA_RESPONSE_TOPIC) || "ip-response";
+    this.responseTopic =
+      String(process.env.KAFKA_RESPONSE_TOPIC) || "ip-response";
     this.consumer = this.kafka.consumer({ groupId });
     this.producer =
       producer ||
@@ -51,7 +48,7 @@ export class KafkaConsumer implements IKafkaConsumer {
     const location = await cache.get(`${key}-${value}`, async () =>
       this.ipStackController.getLocation(`${value}`)
     );
-    this.producer.send({
+    await this.producer.send({
       topic: this.responseTopic,
       messages: [
         {
@@ -84,6 +81,10 @@ export class KafkaConsumer implements IKafkaConsumer {
     } catch (error) {
       console.log("Error: ", error);
     }
+  }
+
+  connect() {
+    this.consumer.connect();
   }
 
   async shutdown(): Promise<void> {

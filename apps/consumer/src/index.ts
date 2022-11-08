@@ -1,6 +1,5 @@
 import "dotenv/config";
-import { KafkaInstance } from "./modules/kafka";
-import { KafkaConsumer } from "./modules/kafka/consumer";
+import { KafkaInstance, KafkaConsumer } from "./modules/kafka/";
 
 const kafkaInstance = new KafkaInstance("consumer-client");
 const consumer = new KafkaConsumer(kafkaInstance.getKafka());
