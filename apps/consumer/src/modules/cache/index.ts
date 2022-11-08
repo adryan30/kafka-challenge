@@ -12,7 +12,6 @@ export class RedisCache implements ICache {
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
       },
-      password: process.env.REDIS_PASSWORD,
     });
     this.cache.connect();
     this.cache.on("connect", () => {

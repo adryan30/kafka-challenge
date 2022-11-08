@@ -9,8 +9,10 @@
     "url": "https://github.com/adryan30"
   },
   "scripts": {
+    "test:consumer": "echo 'Not Implemented'",
     "build:consumer": "yarn workspace consumer build",
     "start:consumer": "yarn workspace consumer start",
+    "test:producer": "yarn workspace producer test",
     "build:producer": "yarn workspace producer build",
     "start:producer": "yarn workspace producer start"
   },
