@@ -1,0 +1,12 @@
+{
+  "name": "consumer",
+  "license": "MIT",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./build/src/index.js",
+    "dev": "ts-node-dev ./src/index.ts",
+    "test": "jest",
+    "prebuild": "rimraf build",
+    "build": "tsc"
+  }
+}

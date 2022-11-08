@@ -1,21 +1,19 @@
-FROM alpine AS base
+FROM bitnami/node AS base
+ARG build_context
 
-RUN apk add --no-cache nodejs yarn tini
-WORKDIR /root/app
-ENTRYPOINT ["/sbin/tini", "--"]
+WORKDIR /root
+
+RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64.deb
+RUN dpkg -i dumb-init_*.deb
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
 COPY package.json .
-
-FROM base AS dependencies
-RUN yarn install --prod --silent
+COPY yarn.lock .
+COPY ./apps/$build_context/package.json apps/$build_context/
+RUN yarn install --prod
 RUN cp -R node_modules prod_node_modules
-RUN yarn install --silent
+RUN yarn install
 
-FROM dependencies AS test
 COPY . .
-RUN  yarn build && yarn test
-
-FROM base AS release
-COPY --from=dependencies /root/app/node_modules ./node_modules
-COPY . .
-EXPOSE 3333
-CMD yarn build && yarn test
+ENV APP=$build_context
+CMD yarn build:$APP && yarn start:$APP

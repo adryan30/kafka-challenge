@@ -1,22 +1,8 @@
 {
-  "compilerOptions": {
-    "lib": ["ES6"],
-    "outDir": "build",
-    "removeComments": true,
-    "target": "ES6",
-    "baseUrl": "./src",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "paths": {},
-    "sourceMap": true,
-    "sourceRoot": "/",
-    "alwaysStrict": true,
-    "allowUnreachableCode": false,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true
-  },
-  "include": ["./src/*.ts"],
-  "exclude": ["node_modules/**/*"]
+  "exclude": ["node_modules/**/*"],
+  "references": [
+    {
+      "path": "./packages/consumer"
+    }
+  ]
 }

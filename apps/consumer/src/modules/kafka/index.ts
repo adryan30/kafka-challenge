@@ -8,7 +8,7 @@ export class KafkaInstance implements IKafkaInstance {
     this.kafka = new Kafka({
       clientId: clientId,
       logLevel: logLevel.NOTHING,
-      brokers: [process.env.KAFKA_HOST || "localhost:9092"],
+      brokers: [process.env.KAFKA_HOST || "kafka:9092"],
       retry: {
         initialRetryTime: 300,
         maxRetryTime: 1800000,

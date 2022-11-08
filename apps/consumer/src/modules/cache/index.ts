@@ -8,6 +8,10 @@ export class RedisCache implements ICache {
   constructor(ttl: number) {
     this.ttl = ttl;
     this.cache = redis.createClient({
+      socket: {
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT),
+      },
       password: process.env.REDIS_PASSWORD,
     });
     this.cache.connect();
@@ -27,7 +31,6 @@ export class RedisCache implements ICache {
         return resolve({ ...JSON.parse(cacheResult), fromCache: true });
       } else {
         const result = await fetcher();
-
         this.cache.set(key, JSON.stringify(result), { EX: this.ttl });
         return resolve({ ...result, fromCache: false });
       }
