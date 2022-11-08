@@ -8,10 +8,12 @@ services:
     ports:
       - 3333:3333
   zookeeper:
+    container_name: zookeeper
     image: wurstmeister/zookeeper:latest
     ports:
       - "2181:2181"
   kafka:
+    container_name: kafka
     image: wurstmeister/kafka:2.11-1.1.1
     ports:
       - "9092:9092"
@@ -25,3 +27,16 @@ services:
       KAFKA_CREATE_TOPICS: "topic-test:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  cache:
+    container_name: cache
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+
+volumes:
+  cache:
+    driver: local

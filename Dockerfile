@@ -12,10 +12,10 @@ RUN yarn install --silent
 
 FROM dependencies AS test
 COPY . .
-RUN  npm run build && npm run test
+RUN  yarn build && yarn test
 
 FROM base AS release
 COPY --from=dependencies /root/app/node_modules ./node_modules
 COPY . .
 EXPOSE 3333
-CMD npm run start
+CMD yarn build && yarn test
