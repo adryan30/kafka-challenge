@@ -1,5 +1,5 @@
-import { IStreamResponseDTO } from "./dtos/IStreamResponseDTO";
+import { IAPIResponseDTO } from "./";
 
 export interface IIPStackController {
-  getLocation(ip: string): Promise<IStreamResponseDTO>;
+  getLocation(ip: string): Promise<IAPIResponseDTO>;
 }
